@@ -57,13 +57,22 @@
         </div>
         <div class="setting-item">
           <label for="espIp" class="setting-label">Device IP</label>
-          <input id="espIp" type="text" class="setting-input" value="http://192.168.170.87" placeholder="http://192.168.170.87" />
+          <input id="espIp" type="text" class="setting-input" value="http://10.176.110.87" placeholder="http://192.168.170.87" />
         </div>
         <div class="setting-item">
           <label for="multiSpeedSlider" class="setting-label">Multi Transition Speed (ms)</label>
           <div class="setting-row">
             <input id="multiSpeedSlider" type="range" min="3" max="200" value="15" step="1" />
             <span id="multiSpeedValue">15 ms</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">Brightness Control</label>
+          <div class="brightness-controls">
+            <button class="btn-brightness" id="btnUltraLow" data-level="ultra-low">Ultra-Low</button>
+            <button class="btn-brightness" id="btnLow" data-level="low">Low</button>
+            <button class="btn-brightness" id="btnMedium" data-level="medium">Medium</button>
+            <button class="btn-brightness" id="btnHigh" data-level="high">High</button>
           </div>
         </div>
       </div>
@@ -163,6 +172,19 @@
     }, 1400);
   }
 
+  async function sendBrightness(level) {
+    const esp = getESP();
+    try {
+      const res = await fetch(esp + '/brightness/' + level, {
+        method: 'GET'
+      });
+      console.log('Brightness set to ' + level + ':', await res.text());
+    } catch (err) {
+      console.error('Failed to set brightness:', err);
+      alert('⚠️ Failed to set brightness. Check ESP IP and try again.');
+    }
+  }
+
   async function sendSingle(color) {
     const esp = getESP();
     try {
@@ -208,6 +230,13 @@
       if (!res.ok) console.warn('Failed to set speed on ESP', await res.text());
     }).catch(err => console.warn('Failed to set speed on ESP', err));
   }
+
+  document.getElementById('btnUltraLow').onclick = () => sendBrightness('ultra-low');
+  document.getElementById('btnLow').onclick = () => sendBrightness('low');
+  document.getElementById('btnMedium').onclick = () => sendBrightness('medium');
+  document.getElementById('btnHigh').onclick = () => sendBrightness('high');
+  
+  // 
 
   if (multiSpeedSlider) {
     multiSpeedSlider.addEventListener('input', (e) => {

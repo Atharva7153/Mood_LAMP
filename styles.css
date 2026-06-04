@@ -327,6 +327,101 @@ body::before {
   color: var(--text-light);
 }
 
+.setting-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.setting-row input[type="range"] {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #333333;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.setting-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-silver);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.setting-row input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-silver);
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+
+.setting-row input[type="range"]::-webkit-slider-thumb:hover {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 8px rgba(192, 192, 192, 0.5);
+}
+
+.setting-row input[type="range"]::-moz-range-thumb:hover {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 8px rgba(192, 192, 192, 0.5);
+}
+
+.setting-row span {
+  min-width: 60px;
+  text-align: right;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ========================================
+   BRIGHTNESS CONTROLS
+   ======================================== */
+
+.brightness-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-brightness {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 16px;
+  border: 2px solid var(--accent-silver);
+  background: transparent;
+  color: var(--accent-silver);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-family: 'Lato', sans-serif;
+}
+
+.btn-brightness:hover {
+  background: var(--accent-silver);
+  color: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-brightness:active {
+  transform: translateY(0);
+}
+
 /* ========================================
    TOGGLE SWITCH
    ======================================== */
